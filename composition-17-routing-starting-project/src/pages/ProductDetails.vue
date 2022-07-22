@@ -7,13 +7,21 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 
 export default {
-  setup() {
+  setup(props) {
+    const products = inject('products');
+    console.log(products);
+    
     const title = ref('');
     const price = ref(null);
     const description = ref('');
+    
+    const selectedProduct = products.find(product => {
+      return product.id===props.pid;
+    });  //products id equal to passed router p-id.
+    console.log(selectedProduct);
 
     return { title, price, description };
   },
